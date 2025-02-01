@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlet Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #667eea, #764ba2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Outlet Login</h2>
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label for="outlet" class="block text-sm font-medium text-gray-700">Select Outlet</label>
+                <select id="outlet" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md">
+                    <option value="">Select an outlet</option>
+                    <option value="702">702</option>
+                    <option value="703">703</option>
+                    <option value="704">704</option>
+                    <option value="705">705</option>
+                    <option value="706">706</option>
+                    <option value="707">707</option>
+                    <option value="708">708</option>
+                    <option value="709">709</option>
+                    <option value="710">710</option>
+                    <option value="711">711</option>
+                    <option value="712">712</option>
+                    <option value="714">714</option>
+                    <option value="715">715</option>
+                    <option value="716">716</option>
+                    <option value="717">717</option>
+                    <option value="719">719</option>
+                </select>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300">
+                Login
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Check if already logged in
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = 'purchasing.html';
+        }
+
+        document.getElementById('outlet').addEventListener('change', function() {
+            document.getElementById('password').focus();
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const outlet = document.getElementById('outlet').value;
+            const passwordInput = document.getElementById('password');
+            const password = passwordInput.value;
+
+            if (outlet && password === outlet) {
+                localStorage.setItem('currentOutlet', outlet);
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'purchasing.html';
+            } else {
+                alert('Invalid credentials');
+                // Clear password and focus
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>
